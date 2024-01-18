@@ -16,18 +16,20 @@ L'utilisation de l'application nécessite que l'execution du projet se realise s
 Le projet est structuré selon la hiérarchie suivante:
 ```c
 
-├── README.md.       //Contexte, problème, explication dela résolution du problème.
+├── README.md.      //Contexte, problème, explication dela résolution du problème.
 ├── USER_MANUAL.md  //Explication de la logique de l'application
-├── ROADMAP.md  //Explication de la roadMap 2023/2024 
-├── src                     // Contient les fichiers relatif au code de l'application
-    ├──Page1.js             // Page relative à la météo. Affiche la météo de Rennes.
-    ├──Page2.js             //Pour future implémentation 
-    ├──Page3.js             //Pour future implémentation 
-    ├──Page4.js             //Pour future implémentation 
-    ├──Page5.js             // Gère le journal 
-    ├──Page6.js             //Pour future implémentation
-    ├──HomeScreen.js.       //Page qui s'affiche au démarrage
-    |──AppNavigator.js     //Gère le changement de page
+├── ROADMAP.md      //Explication de la roadMap 2023/2024
+├── my-app          //L'application 
+        ├── src                     // Contient les fichiers relatif au code de l'application
+            ├──Page1.js             // Page relative à la météo. Affiche la météo de Rennes.
+            ├──Page2.js             //Pour future implémentation 
+            ├──Page3.js             //Pour future implémentation 
+            ├──Page4.js             //Pour future implémentation 
+            ├──Page5.js             //Gère le journal 
+            ├──Page6.js             //Pour future implémentation
+            ├──HomeScreen.js.       //Page qui s'affiche au démarrage
+            |──AppNavigator.js     //Gère le changement de page
+        ├── App.js //Application  
 ```
 
 ## Procédure d'installation
