@@ -34,7 +34,7 @@ Le projet est structuré selon la hiérarchie suivante:
 
 ## Procédure d'installation
 ### initialisation 
--Cette application nécessite pour le moment l'utilisation d'une application nommée "Expo Go" qui peut être téléchargées sur le play store par exemple.
+<br>-Cette application nécessite pour le moment l'utilisation d'une application nommée "Expo Go" qui peut être téléchargées sur le play store par exemple.</br>
 -Ensuite, il faut cloner le répertoire suivant: ???
 -Se déplacer dans INDEN_Hestia puis my-app
 -npm install ?????
