@@ -1,59 +1,84 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-//import { Document, Page, pdfjs } from 'react-native-pdf';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet,Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { PDFDocument, Text as PDFText, rgb } from 'react-native-pdf-lib';
 
-//pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
-const Page5 = ({ navigation }) => {
-  /*const articles = [
-    { id: 1, title: 'Article 1', pdf: require('assets/article2.pdf') },
-    { id: 2, title: 'Article 2', pdf: require('assets/article2.pdf') },
-    { id: 3, title: 'Article 3', pdf: require('assets/article3.pdf') },
-    // Ajoutez d'autres articles au besoin
-  ];
+const documents = [
+  { id: '1', title: 'Document 1', filename: '../assets/document1.pdf' },
+  { id: '2', title: 'Document 2', filename: '../assets/document2.pdf' },
+  // Ajoutez d'autres documents au besoin
+];
+const Page5 = () => {
+    const navigation = useNavigation();
+  
+    const handleDocumentPress = async (filename) => {
+      try {
+        const destPath = RNFetchBlob.fs.dirs.DocumentDir + `/${filename}`;
+        await RNFetchBlob.config({ fileCache: true }).fetch(
+          'GET',
+          `bundle-assets://assets/${filename}`
+        ).then((res) => {
+          RNFetchBlob.fs.writeFile(destPath, res.data, 'base64');
+        });
+  
+        // Naviguez vers PdfViewer avec le chemin local du fichier téléchargé
+        navigation.navigate('PdfViewer', { localPath: destPath });
+      } catch (error) {
+        console.error('Erreur lors du téléchargement du fichier PDF : ', error);
+      }
+    };
+    
+    const handleBackPress = () => {
+      // Revenir à la page précédente (dans ce cas, la page d'accueil)
+      navigation.goBack();
+    };
 
-  const openPDF = (pdf) => {
-    navigation.navigate('PDFViewer', { pdf });
+    const renderItem = ({ item }) => (
+      <TouchableOpacity
+        style={styles.item}
+        onPress={() => handleDocumentPress(item.filename)}
+      >
+        <Text>{item.title}</Text>
+      </TouchableOpacity>
+    );
+  
+    return (
+      <View style={styles.container}>
+        <View style={styles.header}>
+        <Button title="Retour" onPress={() => navigation.goBack()} />
+      </View>
+        <FlatList
+          data={documents}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+        />
+      </View>
+    );
   };
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Journal</Text>
-      {articles.map((article) => (
-        <TouchableOpacity
-          key={article.id}
-          style={styles.button}
-          onPress={() => openPDF(article.pdf)}
-        >
-          <Text style={styles.buttonText}>{article.title}</Text>
-        </TouchableOpacity>
-      ))}
-    </View>
-  );*/
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
+  
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 16,
-  },
-  button: {
-    backgroundColor: '#3498db',
-    padding: 16,
-    marginBottom: 8,
-    borderRadius: 8,
-    alignItems: 'center',
+  header: {
+    position: 'absolute',
+    top: 30,
+    left: 16,
   },
   buttonText: {
-    fontSize: 18,
-    color: 'white',
-    fontWeight: 'bold',
+    color: '#FFF',
+    textAlign: 'center',
   },
-});
-
-export default Page5;
+    item: {
+      padding: 16,
+      borderBottomWidth: 1,
+      borderBottomColor: '#ccc',
+    },
+  });
+  
+  export default Page5;
+  
